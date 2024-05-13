@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Pizza</title>
+</head>
+<body>
+  <h1>Your Pizza Ingredients</h1>
+  <div id="ingredients"></div>
+
+  <script>
+    // Retrieve selected ingredients from query parameter
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const selectedIngredients = {
+      sauces: urlParams.getAll('sauces[]'),
+      cheeses: urlParams.getAll('cheeses[]'),
+      toppings: urlParams.getAll('toppings[]')
+    };
+
+    // Display selected ingredients
+    const ingredientsDiv = document.getElementById('ingredients');
+    Object.keys(selectedIngredients).forEach(category => {
+      const categoryDiv = document.createElement('div');
+      categoryDiv.innerHTML = `<h2>${category.charAt(0).toUpperCase() + category.slice(1)}</h2>`;
+      selectedIngredients[category].forEach(ingredient => {
+        const ingredientDiv = document.createElement('div');
+        ingredientDiv.textContent = ingredient;
+        categoryDiv.appendChild(ingredientDiv);
+      });
+      ingredientsDiv.appendChild(categoryDiv);
+    });
+  </script>
+</body>
+</html>

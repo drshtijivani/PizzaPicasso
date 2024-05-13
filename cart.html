@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Cart</title>
+<style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    td {
+        vertical-align: middle;
+    }
+    .total-price {
+        text-align: right;
+    }
+    .btn {
+        padding: 8px 16px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Pizza Name</th>
+                <th>Price</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>MARGHERITA</td>
+                <td>$10.99</td>
+                <td>
+                    <button class="btn" onclick="decrementCount(0)">-</button>
+                    <span id="pizzaCount0">1</span>
+                    <button class="btn" onclick="incrementCount(0)">+</button>
+                </td>
+            </tr>
+            <tr>
+                <td>MEXICAN GREEN WAVE</td>
+                <td>$12.99</td>
+                <td>
+                    <button class="btn" onclick="decrementCount(1)">-</button>
+                    <span id="pizzaCount1">1</span>
+                    <button class="btn" onclick="incrementCount(1)">+</button>
+                </td>
+            </tr>
+            <tr>
+                <td>VEGGIE PARADISE</td>
+                <td>$11.99</td>
+                <td>
+                    <button class="btn" onclick="decrementCount(2)">-</button>
+                    <span id="pizzaCount2">1</span>
+                    <button class="btn" onclick="incrementCount(2)">+</button>
+                </td>
+            </tr>
+            <tr>
+                <td>PANEER VEGGIE</td>
+                <td>$13.99</td>
+                <td>
+                    <button class="btn" onclick="decrementCount(3)">-</button>
+                    <span id="pizzaCount3">1</span>
+                    <button class="btn" onclick="incrementCount(3)">+</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="total-price">
+        Total Price: $<span id="totalPrice">49.96</span> <!-- Update initial total price accordingly -->
+    </div>
+</div>
+
+<script>
+    function incrementCount(index) {
+        var countElement = document.getElementById('pizzaCount' + index);
+        var count = parseInt(countElement.textContent);
+        count++;
+        countElement.textContent = count;
+        updateTotalPrice();
+    }
+
+    function decrementCount(index) {
+        var countElement = document.getElementById('pizzaCount' + index);
+        var count = parseInt(countElement.textContent);
+        if (count > 0) {
+            count--;
+            countElement.textContent = count;
+            updateTotalPrice();
+        }
+    }
+
+    function updateTotalPrice() {
+        var totalPrice = 0;
+        var pizzaCounts = document.querySelectorAll('[id^="pizzaCount"]');
+        var prices = [10.99, 12.99, 11.99, 13.99]; // Updated with prices for each pizza
+        for (var i = 0; i < pizzaCounts.length; i++) {
+            var count = parseInt(pizzaCounts[i].textContent);
+            totalPrice += count * prices[i];
+        }
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+    }
+</script>
+
+</body>
+</html>

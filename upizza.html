@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pizza Options</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .add-button, .delete-button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .add-button {
+    background-color: #48A832;
+    color: #fff;
+    margin-right: 10px;
+  }
+  
+  .delete-button {
+    background-color: #FF5733;
+    color: #fff;
+  }
+  
+
+  .price-input {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #000000;
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%; /* Make the slider button round */
+  }
+
+  input:checked + .slider {
+    background-color: #45a049; /* Change slider background color when checked */
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+
+<h2>Update Pizza</h2>
+<form method="post" action="submit_pizza_data.php">
+<table>
+  <tr>
+    <th>Pizza Name</th>
+    <!-- <th>Price (INR)</th> -->
+    <th>Availability</th>
+    
+  </tr>
+  <tr>
+    <td>MARGHERITA</td>
+    <!-- <td><input type="text" class="price-input" value="10"></td> -->
+    <td><label class="switch"><input type="checkbox" id="toggle_MARGHERITA" name="MARGHERITA" data-pizza-id="MARGHERITA" onclick="toggleAvailability(this)"><span class="slider round"></span></label></td>
+  </tr>
+  <tr>
+    <td>MEXICAN GREEN WAVE</td>
+    <!-- <td><input type="text" class="price-input" value="12"></td> -->
+    <td><label class="switch"><input type="checkbox" id="toggle_MEXICAN_GREEN_WAVE" name="MEXICAN_GREEN_WAVE" data-pizza-id="MEXICAN_GREEN_WAVE" onclick="toggleAvailability(this)"><span class="slider round"></span></label></td>
+  </tr>
+  <tr>
+    <td>DELUXE VEGGIE</td>
+    <!-- <td><input type="text" class="price-input" value="14"></td> -->
+    <td><label class="switch"><input type="checkbox" id="toggle_DELUXE_VEGGIE" name="DELUXE_VEGGIE" data-pizza-id="DELUXE_VEGGIE" onclick="toggleAvailability(this)"><span class="slider round"></span></label></td>
+  </tr>
+  <tr>
+    <td>VEG EXTRAVAGANZA</td>
+    <!-- <td><input type="text" class="price-input" value="15"></td> -->
+    <td><label class="switch"><input type="checkbox" id="toggle_VEG_EXTRAVAGANZA" name="VEG_EXTRAVAGANZA" data-pizza-id="VEG_EXTRAVAGANZA" onclick="toggleAvailability(this)"><span class="slider round"></span></label></td>
+  </tr>
+  <tr>
+    <td>VEGGIE PARADISE</td>
+    <!-- <td><input type="text" class="price-input" value="13"></td> -->
+    <td><label class="switch"><input type="checkbox" id="toggle_VEGGIE_PARADISE" name="VEGGIE_PARADISE" data-pizza-id="VEGGIE_PARADISE" onclick="toggleAvailability(this)"><span class="slider round"></span></label></td>
+  </tr>
+  <tr>
+    <td>PANEER MAKHANI</td>
+    <!-- <td><input type="text" class="price-input" value="16"></td> -->
+    <td><label class="switch"><input type="checkbox" id="toggle_PANEER_MAKHANI" name="PANEER_MAKHANI" data-pizza-id="PANEER_MAKHANI" onclick="toggleAvailability(this)"><span class="slider round"></span></label></td>
+  </tr>
+  <tr>
+    <td>PANEER VEGGIE</td>
+    <!-- <td><input type="text" class="price-input" value="15"></td> -->
+    <td><label class="switch"><input type="checkbox" id="toggle_PANEER_VEGGIE" name="PANEER_VEGGIE" data-pizza-id="PANEER_VEGGIE" onclick="toggleAvailability(this)"><span class="slider round"></span></label></td>
+  </tr>
+  <tr>
+    <td>PEPPY PANEER</td>
+    <!-- <td><input type="text" class="price-input" value="14"></td> -->
+    <td><label class="switch"><input type="checkbox" id="toggle_PEPPY_PANEER" name="PEPPY_PANEER" data-pizza-id="PEPPY_PANEER"  onclick="toggleAvailability(this)"><span class="slider round"></span></label></td>
+  </tr>
+  <!-- Add more pizza options as needed -->
+</table>
+
+
+<button type="submit" name="submit">Update Availability</button>
+</form>
+<script>
+  
+    // Function to submit prices and update availability in localStorage
+    function submitPrices() {
+        // Get all price inputs
+        var priceInputs = document.querySelectorAll('.price-input');
+        // Create an array to store updated prices
+        var updatedPrices = [];
+        // Iterate through each price input and store its value
+        priceInputs.forEach(function(input) {
+            updatedPrices.push(input.value);
+        });
+        // Store updated prices in localStorage
+        localStorage.setItem('pizzaPrices', JSON.stringify(updatedPrices));
+
+        // Additional functionality related to price update can be added here
+        alert("Prices updated successfully!");
+    }
+
+    // Function to toggle availability
+    function toggleAvailability(element) {
+        const pizzaName = element.id.split("_").pop();
+        const isAvailable = element.checked;
+
+        // Save the state of the pizza item in local storage
+        localStorage.setItem(pizzaName, isAvailable);
+    }
+</script>
+
+</body>
+</html>
